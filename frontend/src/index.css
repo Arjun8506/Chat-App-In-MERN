@@ -9,3 +9,19 @@ body{
     background-position: center;
     font-family: gilroy;
 }
+
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-track{
+    background: grey;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: white;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+    background-color: rgb(216, 216, 214);
+}
