@@ -58,7 +58,11 @@ export const getMessage = async (req, res) => {
         }).populate("messages");
 
         if (!conversation) {
-            res.status(200).json([])
+            return res.status(200).json([])
+        }
+
+        if (!conversation.messages) {
+            return res.status(200).json([]); // Send an empty array if messages property is null or undefined
         }
 
         res.status(200).json(conversation.messages)
