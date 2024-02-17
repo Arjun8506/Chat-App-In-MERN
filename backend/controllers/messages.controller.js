@@ -1,14 +1,12 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/messages.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) =>{
     try {
         const { message } = req.body;
         const {id:receiverId} = req.params;
         const senderId = req.user._id;
-
-        console.log(req.body);
-        console.log(message);
 
         if (!message) {
             return res.status(400).json({ error: "Message content is required" });
@@ -34,10 +32,14 @@ export const sendMessage = async (req, res) =>{
             await newMessage.save();
             conversationbtUsers.messages.push(newMessage._id)
         }
-
-        // SOCKET IO FUNCTIONALITY
-
+        
         await conversationbtUsers.save();
+        
+        // SOCKET IO FUNCTIONALITY
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage)
+        }
 
         res.status(201).json(newMessage)
 

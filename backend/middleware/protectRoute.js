@@ -10,8 +10,6 @@ const protectRoute = async (req, res, next)=>{
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        console.log(decoded);
-
         if (!decoded || !decoded.userid) {
             return res.status(401).json({ error: "Invalid Token" });
         }
@@ -23,8 +21,6 @@ const protectRoute = async (req, res, next)=>{
         }
 
         req.user = user
-
-        console.log("in protected route component", req.user._id);
 
         next();
 
