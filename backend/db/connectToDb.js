@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const connectToDatabase = ()=>{
+const connectToDatabase = async ()=>{
 
     try {
-        mongoose.connect("mongodb://127.0.0.1:27017/Chat-App")
+        await mongoose.connect(process.env.MONGODB_URL)
         console.log("connection successful");
     } catch (error) {
         console.log("not connected");
