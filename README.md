@@ -6,3 +6,4 @@ To Run This Application, use the `Following Commands`:
 npm run dev
 yarn run dev
 ```
+![image](frontend/public/bg.jpg)
